@@ -81,15 +81,13 @@ var blank = function() {
 }
 
 var saveAs = function() {
-  if(filename == ""){
-    filename = prompt("Project name, ex: tesproject");
-    if(filename != null){
-      filename += ".js";
-    }
-  }
-  if(((filename != "") || (filename != null))){
+  filename = prompt("Project name, ex: tesproject.js",filename);
+  if(filename != null){
     var text = editor.getSession().getValue();
     fs.fileWrite(scriptPath+filename,text);
+  }
+  else{
+    alert("Filename is null");
   }
 }
 
@@ -180,7 +178,6 @@ var delProject = function(file){
   if (result) {
     fs.rm(scriptPath+file,function(status){
       if(status){
-        alert("success!");
         loadProject();
       }
       else{
