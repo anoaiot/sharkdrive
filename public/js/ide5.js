@@ -4,6 +4,7 @@ var filename = 'blank.txt';
 var fontsize = '14';
 var state = true;
 var editor = ace.edit('editor');
+var scriptPath = "/opt/ignsdk/";
 //var fs = ign.filesystem();
 //var sys = ign.sys();
 var pathProject;
@@ -35,6 +36,11 @@ $(function() {
     $('html').addClass('overlay');
     var popup = $(this).data('popup-target');
     $(popup).addClass('visible');
+    switch(popup){
+      case "#openproject-popup" :
+        loadProject();
+      break;
+    }
   });
   $('.popup-exit').click(function () {
     closepopup();
@@ -114,8 +120,10 @@ var download = function() {
   }
 };
 
-var openProject = function(){
-  pathProject = fs.openDirDialog();
+var openProject = function(file){
+  console.log(file);
+  closepopup();
+  /*pathProject = fs.openDirDialog();
   index_file = pathProject+"/index.html"
   if(fs.info(index_file).exists){
     var fileBuffer = fs.fileRead(index_file);
@@ -126,7 +134,15 @@ var openProject = function(){
   }
   else{
     alert("ERR : index.html not found!");
-  }
+  }*/
+  
+  fs.fileRead(scriptPath+file,function(data){
+    var fileBuffer = data;
+    editor.setValue(fileBuffer, 1);
+    var modelist = ace.require('ace/ext/modelist');
+    var mode = modelist.getModeForPath(file).mode;
+    editor.session.setMode(mode);
+  })
 }
 
 var undo = function() {
@@ -166,4 +182,17 @@ var run = function(){
 var saveProject = function(){
   var text = editor.getSession().getValue();
   fs.fileWrite(index_file,text);
+}
+
+var loadProject = function(){
+  fs.list(scriptPath,function(data){
+    var html = "";
+    data.forEach(function(file){
+      var nameFile = file.replace(scriptPath,"");
+      if(!((nameFile == ".") || (nameFile == ".."))){
+        html += "<li><a href='javascript:;' onclick='openProject(\""+nameFile+"\")'>"+nameFile+"</a></li>";
+      }
+    });
+    $(".loadProject").html(html);
+  });
 }

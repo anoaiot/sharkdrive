@@ -11,6 +11,7 @@
 
 <body>
   <div class="popup-overlay"></div>
+  
   <div id="about-popup" class="popup">
     <div class="popup-body">
       <div class="popup-content">
@@ -26,6 +27,19 @@
       </div>
     </div>
   </div>
+  
+  <div id="openproject-popup" class="popup">
+    <div class="popup-body">
+      <div class="popup-content">
+        <span class="popup-exit" style="float: right;"></span>
+        <h2 class="popup-title">Open File</h2>
+          <ul class="loadProject">
+            
+          </ul>
+      </div>
+    </div>
+  </div>
+  
   <nav>
     <ul class="menu">
       <li>
@@ -33,10 +47,12 @@
         <ul>
           <li><a href="javascript:;" class="action" data-action="blank">
           <span class="octicon octicon-browser sd-icon"></span> New Project</a></li>
-          <li><a href="javascript:;" class="action" data-action="openProject">
+          <li><a href="javascript:;" class="openp" data-popup-target="#openproject-popup">
+          <span class="octicon octicon-file-directory sd-icon"></span> Open Project</a></li>
+          <!--<li><a href="javascript:;" class="action" data-action="openProject">
           <span class="octicon octicon-file-directory sd-icon"></span> Open Project</a></li>
           <li><a href="javascript:;" class="action" data-action="open">
-          <span class="octicon octicon-file-code sd-icon"></span> Open File</a></li>
+          <span class="octicon octicon-file-code sd-icon"></span> Open File</a></li>-->
           <li><a href="javascript:;" class="action" data-action="saveProject">
           <span class="octicon octicon-file-text sd-icon"></span>  Save</a></li>
           <li><a href="javascript:;" class="action" data-action="open">
