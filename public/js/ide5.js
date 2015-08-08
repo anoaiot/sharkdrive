@@ -80,30 +80,16 @@ var blank = function() {
   }
 }
 
-var open = function() {
-  var save = true;
-  if (!state) {
-    save = confirm('The file is not saved. Are you sure want to open a new file?');
+var saveAs = function() {
+  if(filename == ""){
+    filename = prompt("Project name, ex: tesproject");
+    if(filename != null){
+      filename += ".js";
+    }
   }
-  if (save) {
-    $('.file').click();
-    $('.file').change(function() {
-      var filetemp = $('.file')[0].files[0];
-      filename = filetemp.name;
-      var filereader = new FileReader();
-      filereader.onload = function(evt) {
-        var filebuffer = evt.target.result;
-        // write content to editor
-        editor.setValue(filebuffer, 1);
-        $('.file').replaceWith($('.file').val('').clone(true));
-        // set file mode
-        var modelist = ace.require('ace/ext/modelist');
-        var mode = modelist.getModeForPath(filename).mode;
-        editor.session.setMode(mode);
-      };
-      filereader.readAsText(filetemp, 'UTF-8');
-    });
-    state = true;
+  if(((filename != "") || (filename != null))){
+    var text = editor.getSession().getValue();
+    fs.fileWrite(scriptPath+filename,text);
   }
 }
 
@@ -182,9 +168,24 @@ var loadProject = function(){
     data.forEach(function(file){
       var nameFile = file.replace(scriptPath,"");
       if(!((nameFile == ".") || (nameFile == ".."))){
-        html += "<li><a href='javascript:;' onclick='openProject(\""+nameFile+"\")'>"+nameFile+"</a></li>";
+        html += "<li><a href='javascript:;' onclick='openProject(\""+nameFile+"\")'>"+nameFile+"</a> [<a href='javascript:;' onclick='delProject(\""+nameFile+"\")'>Delete</a>]</li>";
       }
     });
     $(".loadProject").html(html);
   });
+}
+
+var delProject = function(file){
+  var result = confirm("Want to delete?");
+  if (result) {
+    fs.rm(scriptPath+file,function(status){
+      if(status){
+        alert("success!");
+        loadProject();
+      }
+      else{
+        alert("Failed!");
+      }
+    });
+  }
 }
