@@ -1,6 +1,6 @@
 "use strict";
 
-var filename = 'blank.txt';
+var filename = '';
 var fontsize = '14';
 var state = true;
 var editor = ace.edit('editor');
@@ -69,6 +69,7 @@ var closepopup = function() {
 }
 
 var blank = function() {
+  filename = "";
   var save = true;
   if (!state) {
     save = confirm('The file is not saved. Are you sure want to create a new file?');
@@ -121,21 +122,8 @@ var download = function() {
 };
 
 var openProject = function(file){
-  console.log(file);
+  filename = file;
   closepopup();
-  /*pathProject = fs.openDirDialog();
-  index_file = pathProject+"/index.html"
-  if(fs.info(index_file).exists){
-    var fileBuffer = fs.fileRead(index_file);
-    editor.setValue(fileBuffer, 1);
-    var modelist = ace.require('ace/ext/modelist');
-    var mode = modelist.getModeForPath("index.html").mode;
-    editor.session.setMode(mode);
-  }
-  else{
-    alert("ERR : index.html not found!");
-  }*/
-  
   fs.fileRead(scriptPath+file,function(data){
     var fileBuffer = data;
     editor.setValue(fileBuffer, 1);
@@ -180,8 +168,12 @@ var run = function(){
 }
 
 var saveProject = function(){
+  if(filename == ""){
+    filename = prompt("Project name, ex: tesproject");
+    filename += ".js";
+  }
   var text = editor.getSession().getValue();
-  fs.fileWrite(index_file,text);
+  fs.fileWrite(scriptPath+filename,text);
 }
 
 var loadProject = function(){
