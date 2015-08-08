@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Squidrive
+Exec=/usr/bin/ignsdk -p /opt/ignsdk/squidrive-ide.ign
+Icon=/opt/ignsdk/squidrive-ide.ign/icons/app.png
+Terminal=false
+Type=Application
+Categories=Development

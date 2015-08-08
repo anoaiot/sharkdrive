@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ide5 - simple, pure HTML code editor</title>
+  <link rel="stylesheet" href="assets/css/ide5.css">
+  <link rel="stylesheet" href="assets/css/octicons/octicons.css">
+</head>
+
+<body>
+  <div class="popup-overlay"></div>
+  <div id="about-popup" class="popup">
+    <div class="popup-body">   
+      <div class="popup-content">
+        <h2 class="popup-title">About IDE5</h2>
+        <p>
+          <center>
+          IDE5 is a simple, pure HTML5 based code editor.<br>
+          Author fitra@g.pl<br>
+          License GPL Version 3
+          </center>
+        </p>
+        <span class="popup-exit"></span>
+      </div>
+    </div>
+  </div>
+  <nav>
+    <ul class="menu">
+      <li>
+        <a href="javascript:;" class="bar">File</a>
+        <ul>
+          <li><a href="javascript:;" class="action" data-action="blank">
+          <span class="octicon octicon-browser sd-icon"></span> New Project</a></li>
+          <li><a href="javascript:;" class="action" data-action="openProject">
+          <span class="octicon octicon-file-directory sd-icon"></span> Open Project</a></li>
+          <li><a href="javascript:;" class="action" data-action="open">
+          <span class="octicon octicon-file-code sd-icon"></span> Open File</a></li>
+          <li><a href="javascript:;" class="action" data-action="saveProject">
+          <span class="octicon octicon-file-text sd-icon"></span>  Save</a></li>
+          <li><a href="javascript:;" class="action" data-action="open">
+          <span class="octicon octicon-file-symlink-file sd-icon"></span>  Save As</a></li>
+          <!--<li><a href="javascript:;" class="action" data-action="download">Download</a></li>-->
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:;" class="bar">Edit</a>
+        <ul>
+          <li><a href="javascript:;" class="action" data-action="undo">
+          <span class="octicon octicon-chevron-left sd-icon"></span> Undo</a></li>
+          <li><a href="javascript:;" class="action" data-action="redo">
+          <span class="octicon octicon-chevron-right sd-icon"></span> Redo</a></li>
+          <li><a href="javascript:;" class="action" data-action="all">
+          <span class="octicon octicon-checklist sd-icon"></span> Select all</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:;" class="bar">Project</a>
+        <ul>
+          <li><a href="javascript:;" class="action" data-action="run">
+            <span class="octicon octicon-playback-play sd-icon"></span> Run</a>
+          </li>
+          <li><a href="javascript:;" class="action" data-action="redo">
+          <span class="octicon octicon-package sd-icon"></span> Build</a></li>
+          <li><a href="javascript:;" class="action" data-action="all">
+          <span class="octicon octicon-terminal sd-icon"></span> Debug</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:;" class="bar">View</a>
+        <ul>
+          <li><a href="javascript:;" class="action" data-action="plus">
+          <span class="octicon octicon-alignment-aligned-to sd-icon"></span>  Zoom In</a></li>
+          <li><a href="javascript:;" class="action" data-action="minus">
+          <span class="octicon octicon-alignment-align sd-icon"></span> Zoom Out</a></li>
+          <li><a href="javascript:;" class="action" data-action="normal">
+          <span class="octicon octicon-alignment-unalign sd-icon"></span>Normal Size</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:;" class="bar">Help</a>
+        <ul>
+          <li><a href="javascript:;" class="about" data-popup-target="#about-popup">About</a></li>
+          <li><a href="https://github.com/fitraditya/ide5" target="_blank" class="fork">Fork on GitHub</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <pre class="editor" id="editor"></pre>
+  <input type="file" name="file" class="hidden file">
+  <section class="statusbar" id="statusbar">Line: </section>
+  <script src="assets/js/jquery.js"></script>
+  <script src="assets/js/jquery.hotkeys.js"></script>
+  <script src="assets/js/ace/ace.js"></script>
+  <script src="assets/js/ace/ext-modelist.js"></script>
+  <script src="assets/js/ace/ext-statusbar.js"></script>
+  <script src="assets/js/ide5.js"></script>
+</body>
+
+</html>
