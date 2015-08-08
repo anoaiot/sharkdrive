@@ -1,11 +1,11 @@
-"use strict"; 
+"use strict";
 
 var filename = 'blank.txt';
 var fontsize = '14';
 var state = true;
 var editor = ace.edit('editor');
-var fs = ign.filesystem();
-var sys = ign.sys();
+//var fs = ign.filesystem();
+//var sys = ign.sys();
 var pathProject;
 var index_file;
 
