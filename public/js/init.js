@@ -40,3 +40,7 @@ function promt(){
       init();
     }
 }
+
+function otherServer(){
+  promt();
+}
