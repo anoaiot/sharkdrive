@@ -21,6 +21,7 @@ function init(){
     new sharkIO(socket, function(channel) {
       window.fs = channel.objects.fs;
       window.gpio = channel.objects.gpio;
+      window.sys = channel.objects.sys;
     });
   }
 }

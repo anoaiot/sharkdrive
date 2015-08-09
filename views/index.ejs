@@ -35,9 +35,20 @@
       <div class="popup-content">
         <span class="popup-exit" style="float: right;"></span>
         <h2 class="popup-title">Open File</h2>
-          <ul class="loadProject">
-            
-          </ul>
+        <div style="overflow-y:scroll; height:200px;">
+          <ul class="loadProject"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="debug-popup" class="popup debug-action">
+    <div class="popup-body">
+      <div class="popup-content">
+        <span class="popup-exit" style="float: right;"></span>
+        <h2 class="popup-title">Debugging</h2>
+          <div style="overflow-y:scroll; height:200px;" id="debug-scroll"><div id="debugging" ></div></div>
+          <button style="float:right;margin-top:5px" onclick="kill()">Kill Process</button>
       </div>
     </div>
   </div>
@@ -77,12 +88,12 @@
       <li>
         <a href="javascript:;" class="bar">Project</a>
         <ul>
-          <li><a href="javascript:;" class="action" data-action="run">
+          <li><a href="javascript:;" class="debug" data-popup-target="#debug-popup">
             <span class="octicon octicon-playback-play sd-icon"></span> Run</a>
           </li>
           <li><a href="javascript:;" class="action" data-action="redo">
           <span class="octicon octicon-package sd-icon"></span> Build</a></li>
-          <li><a href="javascript:;" class="action" data-action="all">
+          <li><a href="javascript:;"class="debug" data-popup-target=".debug-action">
           <span class="octicon octicon-terminal sd-icon"></span> Debug</a></li>
         </ul>
       </li>

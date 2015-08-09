@@ -5,8 +5,7 @@ var fontsize = '14';
 var state = true;
 var editor = ace.edit('editor');
 var scriptPath = "/opt/ignsdk/";
-//var fs = ign.filesystem();
-//var sys = ign.sys();
+var proc;
 var pathProject;
 var index_file;
 
@@ -36,9 +35,14 @@ $(function() {
     $('html').addClass('overlay');
     var popup = $(this).data('popup-target');
     $(popup).addClass('visible');
+    console.log(popup)
     switch(popup){
       case "#openproject-popup" :
         loadProject();
+      break;
+      case "#debug-popup" :
+        kill();
+        run();
       break;
     }
   });
@@ -144,11 +148,34 @@ var normal = function() {
 }
 
 var about = function() {
-  alert('IDE5' + "\n" + 'Simple, pure HTML5 IDE' + "\n" + 'Author: fitra@gpl' + "\n" + 'License: GPL Version 3');
+  //alert('IDE5' + "\n" + 'Simple, pure HTML5 IDE' + "\n" + 'Author: fitra@gpl' + "\n" + 'License: GPL Version 3');
 }
 
 var run = function(){
-  sys.exec("ignsdk -p "+pathProject);
+  $("#debugging").empty();
+  if(filename != ""){
+    sys.exec("node "+scriptPath+filename,function(out){
+      proc = out;
+      out.pid(function(out){console.log(out)});
+      out.out.connect(function(data,err){
+        $("#debugging").append(data+"<br>");
+        $("#debug-scroll").scrollTop($("#debugging").height());
+      });
+    });
+  }
+}
+
+var debug = function(){
+  proc.out.connect(function(data,err){
+    $("#debugging").append(data+"<br>");
+    $("#debug-scroll").scrollTop($("#debugging").height());
+  });
+}
+
+var kill = function(){
+  if(proc != null){
+    proc.kill();
+  }
 }
 
 var saveProject = function(){
@@ -165,7 +192,8 @@ var loadProject = function(){
     var html = "";
     data.forEach(function(file){
       var nameFile = file.replace(scriptPath,"");
-      if(!((nameFile == ".") || (nameFile == ".."))){
+      var node = nameFile.indexOf("node_modules");
+      if(!((nameFile == ".") || (nameFile == "..") || (node > -1))){
         html += "<li><a href='javascript:;' onclick='openProject(\""+nameFile+"\")'>"+nameFile+"</a> [<a href='javascript:;' onclick='delProject(\""+nameFile+"\")'>Delete</a>]</li>";
       }
     });
