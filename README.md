@@ -1,0 +1,10 @@
+Sharkdrive
+=============
+
+Squidrive adalah IDE sederhana untuk [IGNSDK IoT](http://iot.ignsdk.web.id) yang dikembangkan dari [IDE5](http://html5.web.id/ide5/)
+
+##Maintainer [IDE5](http://html5.web.id/ide5/)##
+* Fitra Aditya (fitra@g.pl)
+
+##Maintainer [SHARKDRIVE IDE](http://ignsdk.web.id)##
+* Eka Tresna Irawan (anak10thn.web.id)
